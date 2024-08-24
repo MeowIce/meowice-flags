@@ -9,7 +9,9 @@ These flags are only compatible with:
 
 `--add-modules=jdk.incubator.vector -XX:+UseG1GC -XX:MaxGCPauseMillis=200 -XX:+UnlockExperimentalVMOptions -XX:+UnlockDiagnosticVMOptions -XX:+DisableExplicitGC -XX:+AlwaysPreTouch -XX:G1NewSizePercent=28 -XX:G1MaxNewSizePercent=50 -XX:G1HeapRegionSize=16M -XX:G1ReservePercent=15 -XX:G1MixedGCCountTarget=3 -XX:InitiatingHeapOccupancyPercent=20 -XX:G1MixedGCLiveThresholdPercent=90 -XX:SurvivorRatio=32 -XX:G1HeapWastePercent=5 -XX:MaxTenuringThreshold=1 -XX:+PerfDisableSharedMem -XX:G1SATBBufferEnqueueingThresholdPercent=30 -XX:G1ConcMarkStepDurationMillis=5 -XX:G1RSetUpdatingPauseTimePercent=0 -XX:+UseNUMA -XX:-DontCompileHugeMethods -XX:MaxNodeLimit=240000 -XX:NodeLimitFudgeFactor=8000 -XX:ReservedCodeCacheSize=400M -XX:NonNMethodCodeHeapSize=12M -XX:ProfiledCodeHeapSize=194M -XX:NonProfiledCodeHeapSize=194M -XX:NmethodSweepActivity=1 -XX:+UseFastUnorderedTimeStamps -XX:+UseCriticalJavaThreadPriority -XX:AllocatePrefetchStyle=3 -XX:+AlwaysActAsServerClassMachine -XX:+UseTransparentHugePages -XX:LargePageSizeInBytes=2M -XX:+UseLargePages -XX:+EagerJVMCI -XX:+UseStringDeduplication -XX:+UseAES -XX:+UseAESIntrinsics -XX:+UseFMA -XX:+UseLoopPredicate -XX:+RangeCheckElimination -XX:+OptimizeStringConcat -XX:+UseCompressedOops -XX:+UseThreadPriorities -XX:+OmitStackTraceInFastThrow -XX:+RewriteBytecodes -XX:+RewriteFrequentPairs -XX:+UseFPUForSpilling -XX:+UseFastStosb -XX:+UseNewLongLShift -XX:+UseVectorCmov -XX:+UseXMMForArrayCopy -XX:+UseXmmI2D -XX:+UseXmmI2F -XX:+UseXmmLoadAndClearUpper -XX:+UseXmmRegToRegMoveAll -XX:+EliminateLocks -XX:+DoEscapeAnalysis -XX:+AlignVector -XX:+OptimizeFill -XX:+EnableVectorSupport -XX:+UseCharacterCompareIntrinsics -XX:+UseCopySignIntrinsic -XX:+UseVectorStubs -XX:UseAVX=2 -XX:UseSSE=4 -XX:+UseFastJNIAccessors -XX:+UseInlineCaches -XX:+SegmentedCodeCache -Djdk.nio.maxCachedBufferSize=262144 -Dgraal.UsePriorityInlining=true -Dgraal.Vectorization=true -Dgraal.OptDuplication=true -Dgraal.DetectInvertedLoopsAsCounted=true  -Dgraal.LoopInversion=true -Dgraal.VectorizeHashes=true -Dgraal.EnterprisePartialUnroll=true -Dgraal.VectorizeSIMD=true -Dgraal.StripMineNonCountedLoops=true  -Dgraal.SpeculativeGuardMovement=true -Dgraal.TuneInlinerExploration=1 -Dgraal.LoopRotation=true -Dgraal.OptWriteMotion=true -Dgraal.CompilerConfiguration=enterprise
 `
-
+# Why would I have to... switch ?
+Almost 99% of Minecraft servers use Aikar's Flags and it is recommended by many people (some use nothing !). But why use other flags ?
+The answer is that we have now developed to Minecraft 1.21.x and Java 22 (at the time of writing this) and Aikar's Flags **was written mainly to optimize Minecraft's Garbage Collector** and Java at that time (around 2018 - 2020). Later Java versions (from Java 17 and above) have added many optimization items for JVM. So I wrote a separate flag to support optimizations and integrates new features of Java 17+ while still keeping Aikar's flags to optimize GC. <ins>There's no risk in trying my flags !</ins>
 # Explainations
 - `--add-modules=jdk.incubator.vector` Enables advanced vector computation capabilities for Pufferfish/Purpur 1.18+. Useful for optimizing chunk loading and rendering.
 - ` -XX:+UseG1GC -XX:MaxGCPauseMillis=200 -XX:+UnlockExperimentalVMOptions -XX:+UnlockDiagnosticVMOptions -XX:+DisableExplicitGC -XX:+AlwaysPreTouch -XX:G1NewSizePercent=28 -XX:G1MaxNewSizePercent=50 -XX:G1HeapRegionSize=16M -XX:G1ReservePercent=15 -XX:G1MixedGCCountTarget=3 -XX:InitiatingHeapOccupancyPercent=20 -XX:G1MixedGCLiveThresholdPercent=90 -XX:SurvivorRatio=32 -XX:G1HeapWastePercent=5 -XX:MaxTenuringThreshold=1 -XX:+PerfDisableSharedMem -XX:G1SATBBufferEnqueueingThresholdPercent=30 -XX:G1ConcMarkStepDurationMillis=5 -XX:G1RSetUpdatingPauseTimePercent=0` These are very generic G1GC flags, based on [Aikar's Flags](https://aikar.co/2018/07/02/tuning-the-jvm-g1gc-garbage-collector-flags-for-minecraft/).
@@ -70,6 +72,19 @@ These flags are only compatible with:
 - `-Dgraal.SpeculativeGuardMovement=true` Enables speculative guard movement in the Graal compiler.
 - `-Dgraal.TuneInlinerExploration=1` Tunes the inliner exploration parameter in the Graal compiler.
 - `-Dgraal.LoopRotation=true -Dgraal.UseCountedLoopSafepoints=true -Dgraal.EnterprisePartialUnroll=true` Loops related.
+# Small test
+Aikar's Flags and Adoptium JDK:
+
+![image](https://github.com/user-attachments/assets/93e5ab90-708f-4d8a-8979-fa03e5cb6a56)
+
+![image](https://github.com/user-attachments/assets/efb29f29-8512-4fda-a5e6-f038109c5270)
+
+MeowIce's Flags and GraalVM:
+
+![image](https://github.com/user-attachments/assets/8acd1d80-847d-403d-bb40-7f06c2074d02)
+
+![image](https://github.com/user-attachments/assets/e99e1d94-4fd0-497e-a5f5-bf8c5fdba9a8)
+
 
 ### Sources
 - [Java Flags Benchmarked](https://github.com/brucethemoose/Minecraft-Performance-Flags-Benchmarks)
