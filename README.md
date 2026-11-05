@@ -127,13 +127,6 @@ One final note: I only encountered a single G1 Old Gen event, which caused a min
 
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-### Donate
-
-Hey ! If my JVM flags help your server, or if you want to contribute, consider donating to keep me motivated to improve them !  
-ETH: `0x7F4d0e0Ed6836C1558d6fEF43BB808CA2743D184`  
-BTC: `bc1p7azhpa6g5jlm0ujglfj8u88aeh2hhhdxuu675afcxsvjf7gh53psc7lj3j`  
-XMR: `48By4CMoPJr66b1tGgwbKXBMVZxqtPE1d1inyoGJGJM3SQSfwgTVoeQCPA9z8ioJHoeznuB2ntuNga8r1WNM1j3TSUYnSCr`  
-TON: `UQCYAO9xv3QNFbYkVq0G_bHMTXf-mIGyVec0T4DgMWd8cqKi`  
 
 ### Star History
 
